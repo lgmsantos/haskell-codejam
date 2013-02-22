@@ -1,0 +1,71 @@
+	Fri Feb 08 18:12 2013 Time and Allocation Profiling Report  (Final)
+
+	   main.exe +RTS -p -N4 -RTS A-small-practice.in
+
+	total time  =       10.97 secs   (43866 ticks @ 1000 us, 4 processors)
+	total alloc = 17,762,821,056 bytes  (excludes profiling overheads)
+
+COST CENTRE          MODULE  %time %alloc
+
+IDLE                 IDLE     33.6    0.0
+subProblems.subVines Main     29.8   18.4
+sublists             Main     22.1   41.5
+solve.sub            Main      5.0   28.3
+solve                Main      3.4    1.7
+subProblems          Main      2.7    8.1
+swing                Main      0.5    1.4
+
+
+                                                                               individual     inherited
+COST CENTRE                       MODULE                     no.     entries  %time %alloc   %time %alloc
+
+MAIN                              MAIN                        45           0    0.5    0.0   100.0  100.0
+ main                             Main                        91           0    0.0    0.0    65.9  100.0
+  showProblems                    Main                       100          31    0.0    0.0    65.8   99.9
+   solve                          Main                       104    30544471    3.4    1.7    65.8   99.9
+    compare                       Main                       125           9    0.0    0.0     0.0    0.0
+     compare.reach                Main                       126          18    0.0    0.0     0.0    0.0
+    solve.solveOther              Main                       122    25439602    0.7    0.0     0.7    0.0
+    solve.solveFirst              Main                       117    25426554    0.6    0.0     0.6    0.0
+    solve.sub                     Main                       112    30479853    5.0   28.3    61.2   98.2
+     compare                      Main                       119     5227055    0.4    0.0     0.6    0.5
+      compare.reach               Main                       120    10437777    0.2    0.5     0.2    0.5
+     subProblems                  Main                       113    30658687    2.7    8.1    55.6   69.5
+      subProblems.subVines        Main                       114    30749899   29.8   18.4    52.9   61.3
+       swing                      Main                       118    30431641    0.5    1.4     0.5    1.4
+       sublists                   Main                       116   319573722   22.1   41.5    22.1   41.5
+       canReach                   Main                       115   368933276    0.5    0.0     0.5    0.0
+  main.problems                   Main                        94           1    0.0    0.0     0.1    0.1
+   readProblem                    Main                        95           1    0.0    0.0     0.1    0.1
+    buildProblems                 Main                        99          30    0.0    0.0     0.0    0.0
+     buildProblems.problemData'   Main                       123          29    0.0    0.0     0.0    0.0
+     buildProblems.(...)          Main                       102          30    0.0    0.0     0.0    0.0
+      buildProblem                Main                       103          30    0.0    0.0     0.0    0.0
+       buildProblem.problemData'  Main                       124          29    0.0    0.0     0.0    0.0
+       buildProblem.(...)         Main                       111          30    0.0    0.0     0.0    0.0
+       buildProblem.distance      Main                       110          30    0.0    0.0     0.0    0.0
+       buildProblem.vineCount'    Main                       108          30    0.0    0.0     0.0    0.0
+       buildProblem.vines         Main                       107          30    0.0    0.0     0.0    0.0
+        buildVines                Main                       109        1574    0.0    0.0     0.0    0.0
+       buildProblem.startingReach Main                       106          30    0.0    0.0     0.0    0.0
+       buildProblem.(...)         Main                       105          30    0.0    0.0     0.0    0.0
+     buildProblems.firstProblem   Main                       101          30    0.0    0.0     0.0    0.0
+    readProblem.cases             Main                        98           1    0.0    0.0     0.0    0.0
+    readProblem.(...)             Main                        97           1    0.1    0.1     0.1    0.1
+    readProblem.caseCount         Main                        96           1    0.0    0.0     0.0    0.0
+  main.fileName                   Main                        93           1    0.0    0.0     0.0    0.0
+  main.(...)                      Main                        92           1    0.0    0.0     0.0    0.0
+ CAF                              GHC.IO.FD                   78           0    0.0    0.0     0.0    0.0
+ CAF                              GHC.Show                    77           0    0.0    0.0     0.0    0.0
+ CAF                              Text.Read.Lex               76           0    0.0    0.0     0.0    0.0
+ CAF                              GHC.IO.Encoding.CodePage    73           0    0.0    0.0     0.0    0.0
+ CAF                              GHC.IO.Encoding             70           0    0.0    0.0     0.0    0.0
+ CAF                              GHC.Conc.Windows            67           0    0.0    0.0     0.0    0.0
+ CAF                              System.Environment          62           0    0.0    0.0     0.0    0.0
+ CAF                              Data.Fixed                  58           0    0.0    0.0     0.0    0.0
+ CAF                              GHC.IO.Handle.FD            56           0    0.0    0.0     0.0    0.0
+ CAF                              Data.Time.Clock.POSIX       53           0    0.0    0.0     0.0    0.0
+ CAF                              Main                        52           0    0.0    0.0     0.0    0.0
+  main                            Main                        90           1    0.0    0.0     0.0    0.0
+   showProblems                   Main                       121           0    0.0    0.0     0.0    0.0
+ IDLE                             IDLE                        46           0   33.6    0.0    33.6    0.0
