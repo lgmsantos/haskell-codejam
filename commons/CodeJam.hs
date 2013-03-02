@@ -1,9 +1,10 @@
-module CodeJam(Problem(..), takeS, takeSN)
+module CodeJam(Problem(..), takeS, takeSN, mainCodeJam)
 where
 
 import Data.List
 import Text.Printf
 import Control.Monad.State
+import System.Environment
 
 takeS :: Int -> State [String] [String]
 takeS n = do
@@ -17,7 +18,12 @@ takeSN = do
     put state
     takeS (read n)
 
+mainCodeJam :: (Problem a) => (FilePath -> IO [a]) -> IO ()
+mainCodeJam loader = getArgs >>= loader.head >>= printProblems
+
 class Problem a where
+    readProblem :: State [String] a
+
     readProblem :: [String] -> Maybe (a, [String])
     showSolution :: a -> String
 
