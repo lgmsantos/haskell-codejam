@@ -1,36 +1,49 @@
-import CodeJam
-
+import Control.Monad
 import Data.List
 import Debug.Trace
+import Data.Function
+import CodeJam
 
 type Point = (Float, Int)
-data HotDog = HD Float Float [Point] 
-            | SD Float Float Point deriving (Show)
+data HotDog = HD Float [Point] deriving (Show)
 
 instance Problem HotDog where
     readProblem = do
         (count, distance) <- consumePair
-        pairs <- sequence $ replicate count consumePair
-        return $ HD 0 distance pairs
+        pairs <- replicateM count consumePair
+        return $ HD distance pairs
 
-    showSolution = show . foldl1 merge . subProblems 
+    showSolution = show . solve 
 
-subProblems (HD time distance distribution) = map (SD time distance) distribution
+solve = maximum . map solve' . subproblems
+solve' problem = abs . distance flat . adjustFrom flat base . problem
+    where flat = flatten problem
 
-merge (SD t d (p, v)) (SD t' _ (p', v')) = SD t'' d (p'', v'')
-    where v'' = v + v'
-          p'' = (p + p') / 2
-          t'' = - (max t t' + (abs $ p - p''))
+subproblems (HD distance points) = 
 
-solve (SD t d (p, v)) = a / 2 + t - (d / 2)
-    where a = fromIntegral v * d
+range distance points = (mid - r, mid + r)
+    where mid = midle . fst . unzip $ points
+          r = area distance points / 2
+
+flatten (HD distance points) = concat $ points >>= return . (uncurry $ flip replicate)
+
+base p@(HD distance points) = [0,distance..area distance points]
+
+area distance points = (distance *) . fromIntegral . pred . sum . snd . unzip $ points
+
+distance p p' = maximumBy (compare `on` abs) $ zipWith (-) p p'
+
+adjustFrom original points = map (+ (m - m')) points
+    where m = midle original
+          m' = midle points
+
+midle points = (head points + last points) / 2
+
+
+
+info p@(HD d pts) = (head f - ar, midle f, last f + ar)
+  where f = flatten p
+        ar = area d pts / 2
 
 loader = loadProblems :: FilePath -> IO [HotDog]
 main = mainCodeJam loader
-main' = do
-    (_:p:_) <- loader "../sample.in"
-    print p
-    let sub = subProblems p
-    let a = foldl1 merge sub
-    print a 
-    print $ solve (SD 0 2 (3, 2))
